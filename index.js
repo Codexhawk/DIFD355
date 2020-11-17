@@ -90,7 +90,7 @@ while (contin == 'Y') {
     var content = readline();
     console.log("What is the first name of the person you are trying to update the info of?"); //i am using name instead is to find the instance bacuse the user would not know the id number redily
     var firstname = readline();
-    console.log("What is the first name of the person you are trying to update the info of?");
+    console.log("What is the last name of the person you are trying to update the info of?");
     var lastname = readline();
     connection.execute(
       'UPDATE USER_ACCOUNT SET ?=? WHERE FirstName=? AND LastName=?',
@@ -106,7 +106,8 @@ while (contin == 'Y') {
   }
 
   if (answer == 'DELETE') {
-    console.log("Enter the id for the person you are trying to DELETE. If you do not know the id, enter 'no' and then when promted perform a select statement.");
+    console.log("Enter the id for the person you are trying to DELETE.");
+    var id = readline();
     connection.execute(
       'DELETE FROM USER_ACCOUNT WHERE id = ?;',
       [id],
