@@ -106,7 +106,7 @@ while (contin == 'Y') {
   }
 
   if (answer == 'DELETE') {
-    console.log("Enter the id for the person you are trying to DELETE. If you do not know the id, enter 'no' and then when promted perform a select statement.)
+    console.log("Enter the id for the person you are trying to DELETE. If you do not know the id, enter 'no' and then when promted perform a select statement.");
     connection.execute(
       'DELETE FROM USER_ACCOUNT WHERE id = ?;',
       [id],
