@@ -7,8 +7,8 @@ CREATE TABLE USER_ACCOUNT (
 	Phone VARCHAR(15),
 	StreetAddress  VARCHAR(60),
 	City VARCHAR(40),
-	State VARCHAR(2),
-	Zip VARCHAR(5),
+	State VARCHAR(2), // Change to CHAR()
+	Zip VARCHAR(5), // Change to CHAR()
 	PRIMARY KEY(id)
 );
 
@@ -38,13 +38,13 @@ while (contin == 'Y') {
     var fname = readline();
     console.log("last name:");
     var lname = readline();
-    console.log("Here is you Select statements results: ")
+    console.log("Here is you Select statements results: ");
+
     connection.execute(
-      'SELECT * FROM `table` WHERE `FirstName` = ? AND `LastName` = ?',
+      'SELECT * FROM USER_ACCOUNT WHERE FirstName = ? AND LastName = ?',
       [fname, lname],
       function(err, results) {
         console.log(results);
-    
       }
     );
 
@@ -53,13 +53,29 @@ while (contin == 'Y') {
   }
 
   if (answer == 'CREATE') {
+    console.log("Please input the content into the fields as they are provided.");
+    console.log("Email: ");
+    var Email = readline();
+    console.log("First Name: ");
+    var FirstName = readline();
+    console.log("Last Name: ");
+    var LastName = readline();
+    console.log("Phone number(no spaces, hyphens or parenthese): ");
+    var Phone = readline();
+    console.log("Street address: ");
+    var StreetAddress = readline();
+    console.log("City: ");
+    var City = readline();
+    console.log("State: ");
+    var State = readline();
+    console.log("Zipcode: ");
+    var Zip = readline();
 
     connection.execute(
-      'insert INTO USER_ACCOUNTS (id, Email, FirstName, LastName, ',
-      [name, age],
+      'Insert INTO USER_ACCOUNT (id, Email, FirstName, LastName, Phone, StreetAddress, City, State, Zip) Values (NULL, ?, ?, ?, ?, ?, ?, ?, ?)',
+      [Email, FirstName, LastName, Phone, StreetAddress, City, State, Zip],
       function(err, results) {
         console.log(results);
-    
       }
     );
     
@@ -68,10 +84,17 @@ while (contin == 'Y') {
   }
 
   if (answer == 'UPDATE') {
-
+    console.log("What variable would you like to access? case sensitive (id, Email, FirstName, LastName, Phone, StreetAddress, City, State, Zip)");
+    var variable = readline();
+    console.log("What will be the new content?");
+    var content = readline();
+    console.log("What is the first name of the person you are trying to update the info of?"); //i am using name instead is to find the instance bacuse the user would not know the id number redily
+    var firstname = readline();
+    console.log("What is the first name of the person you are trying to update the info of?");
+    var lastname = readline();
     connection.execute(
-      'SELECT * FROM `table` WHERE `name` = ? AND `age` > ?',
-      [name, age],
+      'UPDATE USER_ACCOUNT SET ?=? WHERE FirstName=? AND LastName=?',
+      [variable, content, firstname, lastname],
       function(err, results) {
         console.log(results);
     
@@ -83,10 +106,10 @@ while (contin == 'Y') {
   }
 
   if (answer == 'DELETE') {
-
+    console.log("Enter the id for the person you are trying to DELETE. If you do not know the id, enter 'no' and then when promted perform a select statement.)
     connection.execute(
-      'SELECT * FROM `table` WHERE `name` = ? AND `age` > ?',
-      [name, age],
+      'DELETE FROM USER_ACCOUNT WHERE id = ?;',
+      [id],
       function(err, results) {
         console.log(results);
     
